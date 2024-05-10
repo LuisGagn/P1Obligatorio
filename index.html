@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Trivia</title>
+</head>
+<body>
+
+<!-- DESCRIPCION -->
+    <div id="descripcion">
+            <h1>Descripcion General</h1>
+            <h3>¿Que encontraras en este sitio?</h3>
+
+            <p>En este sitio podrás crear temas, preguntas y jugar a nuestra versión del conocido juego de Trivia.</p>
+            <p>Es una prueba de conocimientos generales con preguntas y respuestas.</p>
+            <p>Cada tema tiene un nombre y una descripcion. Cada pregunta es de un tema, tiene un nivel (1-muy fácil, ..., 5-muy difícil), un texto que la describe y te aparecerán varias respuestas, pero una sola es la correcta.
+                Si la respondes bien, sumas 10 puntos, por cada error pierdes un punto, ¡pero puede usar la ayuda!. </p>
+            <p>El sitio fue desarrollado en el 1er. semestre 2024 - Programacion I - Universidad ORT Uruguay por:</p>
+            <div class="estudiantes">
+                <img src="imagenes/pfp.png" alt="">  Nombre Apellido N° 999999 y  <img src="imagenes/pfp.png" alt="">  Nombre Apellido N° 999999 
+            </div>
+    </div>
+
+
+<!-- GESTION DE TEMAS -->
+
+    <div id="gestion">
+        <h1>GESTIÓN DE TEMAS</h1>
+        <h3>Alta de Temas</h3>
+        <div class="temas">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="margen anchobox" id="nombre"> 
+            <label for="desc">Descripcion</label> 
+            <input type="text" class="margen anchobox" id="desc"> 
+            <button>Agregar</button>
+        </div>
+        <h3>Datos generales de temas</h3>
+        <p>Lista de temas (total de temas: 0)</p>
+        <div>
+            <ul>
+                <li>Sin Datos</li>
+            </ul>
+        </div>
+        <p>Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): sin datos</p>
+        <p>Temas sin preguntas:</p>
+        <div>
+            <ul>
+                <li>Sin Datos</li>
+            </ul>
+        </div>
+</div>
+
+
+<!-- A JUGAR -->
+
+<div id="jugar">
+    <h1>¡A JUGAR!</h1>
+    <h3>Configuracion</h3>
+
+   <div class="seleccion">
+        <label for="temaelegir">Tema a elegir</label>
+        <select name="dropdown" class="margen anchobox" id="temaelegir">
+            <option value="0"></option>
+        </select> 
+        <label for="lvl">Nivel del juego</label>
+        <input type="number" value="1" min="1" max="5" class="margen" id="lvl">
+        <button>Jugar</button>
+    </div>
+
+    <h3>Juego</h3>
+
+    <p> Puntaje Acumulado en esta partida : 0</p>
+    <p> La pregunta es...:</p>
+
+
+    <div class="juego">
+        <div class="pregunta">
+            <p>TEXTO DE LA PREGUNTA</p>
+        </div>
+        <div class="respuestas">
+            <button>Respuesta 1</button> <button>Respuesta 2</button> <button>Respuesta 3</button>
+        </div>
+        <div>
+            <button>Ayuda</button> <button>Siguiente Pregunta</button> <button>Terminar</button>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

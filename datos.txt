@@ -1,0 +1,18 @@
+Colores
+
+Letra negro
+
+Trivia: 
+Fondo - #f9a370
+
+Descripcion:
+Fondo - #f6f1db
+
+Gestion:
+Fondo - #ffd388
+Tabla - #f3f1f2
+
+Jugar:
+Fondo - #fddac6
+Botones - #e07c23
+Letra boton - blanco
