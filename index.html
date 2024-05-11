@@ -29,13 +29,13 @@
     <div id="gestion">
         <h1>GESTIÓN DE TEMAS</h1>
         <h3>Alta de Temas</h3>
-        <div class="temas">
+        <form class="temas">
             <label for="nombre">Nombre</label>
             <input type="text" class="margen anchobox" id="nombre"> 
             <label for="desc">Descripcion</label> 
             <input type="text" class="margen anchobox" id="desc"> 
             <button>Agregar</button>
-        </div>
+        </form>
         <h3>Datos generales de temas</h3>
         <p>Lista de temas (total de temas: 0)</p>
         <div>
@@ -50,43 +50,41 @@
                 <li>Sin Datos</li>
             </ul>
         </div>
-</div>
 
 
 <!-- A JUGAR -->
 
-<div id="jugar">
-    <h1>¡A JUGAR!</h1>
-    <h3>Configuracion</h3>
+    <div id="jugar">
+        <h1>¡A JUGAR!</h1>
+        <h3>Configuracion</h3>
 
-   <div class="seleccion">
-        <label for="temaelegir">Tema a elegir</label>
-        <select name="dropdown" class="margen anchobox" id="temaelegir">
-            <option value="0"></option>
-        </select> 
-        <label for="lvl">Nivel del juego</label>
-        <input type="number" value="1" min="1" max="5" class="margen" id="lvl">
-        <button>Jugar</button>
+    <form class="seleccion">
+            <label for="temaelegir">Tema a elegir</label>
+            <select name="dropdown" class="margen anchobox" id="temaelegir">
+            </select> 
+            <label for="lvl">Nivel del juego</label>
+            <input type="number" value="1" min="1" max="5" class="margen" id="lvl">
+            <button>Jugar</button>
+        </form>
+
+        <h3>Juego</h3>
+
+        <p> Puntaje Acumulado en esta partida : 0</p>
+        <p> La pregunta es...:</p>
+
+
+        <div class="juego">
+            <div class="pregunta">
+                <p>TEXTO DE LA PREGUNTA</p>
+            </div>
+            <div class="respuestas">
+                <button>Respuesta 1</button> <button>Respuesta 2</button> <button>Respuesta 3</button>
+            </div>
+            <div>
+                <button>Ayuda</button> <button>Siguiente Pregunta</button> <button>Terminar</button>
+            </div>
+        </div>
     </div>
-
-    <h3>Juego</h3>
-
-    <p> Puntaje Acumulado en esta partida : 0</p>
-    <p> La pregunta es...:</p>
-
-
-    <div class="juego">
-        <div class="pregunta">
-            <p>TEXTO DE LA PREGUNTA</p>
-        </div>
-        <div class="respuestas">
-            <button>Respuesta 1</button> <button>Respuesta 2</button> <button>Respuesta 3</button>
-        </div>
-        <div>
-            <button>Ayuda</button> <button>Siguiente Pregunta</button> <button>Terminar</button>
-        </div>
-    </div>
-</div>
 
 
 </body>
