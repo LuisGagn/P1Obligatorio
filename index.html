@@ -7,9 +7,18 @@
     <title>Trivia</title>
 </head>
 <body>
+<!-- ENCABEZADO -->
+    <header>
+        <img id="triviaImagen"src="https://i.ibb.co/k17sRn9/imagen-2024-05-07-094155781.png">
+
+        <div>
+        <a class="links" href="descripcion">Información General</a>
+        <a class="links"href="descripcion">Administrar</a>
+        <a class="links"href="descripcion">¡Jugar! </a>
+        </header>
 
 <!-- DESCRIPCION -->
-    <div id="descripcion">
+    <div  id="descripcion">
             <h1>Descripcion General</h1>
             <h3>¿Que encontraras en este sitio?</h3>
 
@@ -28,7 +37,7 @@
 
     <div id="gestion">
         <h1>GESTIÓN DE TEMAS</h1>
-        <h3>Alta de Temas</h3>
+        <h3>Alta de temas</h3>
         <form class="temas">
             <label for="nombre">Nombre</label>
             <input type="text" class="margen anchobox" id="nombre"> 
@@ -50,6 +59,54 @@
                 <li>Sin Datos</li>
             </ul>
         </div>
+
+<!-- GESTION DE PREGUNTAS -->
+
+         <div id="gestionPreguntas">
+        <h1>GESTIÓN DE PREGUNTAS</h1>
+        <h3>Alta de preguntas</h3>
+        <form class="preguntas">
+            <label for="temaPreguntas">Tema</label>
+            <select name="dropdown" class="margen anchobox" id="temaePreguntas">
+            </select> 
+            <label for="nivel">Nivel</label>
+            <input type="text" class="margen anchobox" id="nivel"> <br>
+            <label for="textoPregunta">Texto de la pregunta </label> 
+            <input type="text" class="margen anchobox" id="textoPregunta"> 
+            <label for="respuestaCorrecta">Resupuesta correcta </label> 
+            <input type="text" id="respuestaCorrecta"> 
+            <label for="respuestaIncorrecta">Resupuesta incorrecta </label> 
+            <input type="text" id="respuestaIncorrecta"> 
+            <button>Agregar</button>
+        </form>
+
+        <h3>Datos generales de preguntas</h3>
+        <p>Total de preguntas registradas: 0 preguntas</p>
+        <p>Máximo puntaje obtenido por un jugador: sin datos</p> <br>
+
+        <div id="preguntasRegistradasDiv">
+            <p> Preguntas registradas: </p> 
+            <input type="radio" id="preguntasRegistradas"> 
+            <label for="preguntasRegistradas"> Orden nombre tema creciente/nivel creciente </label>
+            <input type="radio" id="preguntasRegistradas"> 
+            <label for="preguntasRegistradas"> Orden nombre tema decreciente/nivel creciente </label> 
+
+        </div>
+        <div>
+            <table id="tablaPreguntas">
+                <tr>
+                  <th>Nombre del Tema</th>
+                  <th>Nivel</th>
+                  <th>Texto de la pregunta</th>
+                  <th>Respuesta correcta</th>
+                  <th>Respuesta incorrecta</th>
+                </tr>
+
+              </table>
+
+        </div>
+        </div>
+    </div>
 
 
 <!-- A JUGAR -->

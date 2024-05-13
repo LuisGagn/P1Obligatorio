@@ -16,13 +16,37 @@ body {
 }
 h1 {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.336);
+  
 }
 h1,
 h3 {
     text-align: center;
+    
+}
+/* Encabezado */
+
+header {
+
+    background-color: #F4a573;
+    text-align: center;
+}
+
+#triviaImagen {
+
+    display: flex;
+    margin: 0 auto;
+    width: 15%;
+
+}
+.links {
+
+    display: inline;
+    margin: 0 15px
+    
 }
 
 /* Descripcion */
+
 #descripcion {
     background-color: #f6f1db;
 }
@@ -30,7 +54,7 @@ h3 {
     max-width: 50px;
     margin: 10px;
 }
-.estudiantes{
+.estudiantes{ 
     display: flex;
     height: 100px;
     align-items: center;
@@ -38,6 +62,32 @@ h3 {
 /* Gestion */
 #gestion {
     background-color: #ffd388;
+}
+/* Gestion Preguntas */
+
+
+#gestionPreguntas {
+    background-color: #ffd388;
+    
+}
+#tablaPreguntas {
+    background-color: #ffd388;
+    border: 2px solid black;
+    display: flex;
+    border-collapse: collapse;
+
+}
+th{
+    background-color: whitesmoke;
+    border: 1px solid black;
+    width: 10%;
+
+}
+
+#preguntasRegistradasDiv {
+
+    box-shadow: 1px 1px 5px rgb(255, 255, 255);
+    display: flex;
 }
 
 
