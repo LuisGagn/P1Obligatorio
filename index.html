@@ -1,3 +1,15 @@
+<!-- 
+    OBLIGATORIO PROGRAMACION 1 
+    REALIZADO POR:
+    XXXXX XXXXX N° XXXXXX
+    LUIS GAGÑEVIN N°338643
+
+-->
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,13 +21,16 @@
 <body>
 <!-- ENCABEZADO -->
     <header>
-        <img id="triviaImagen"src="https://i.ibb.co/k17sRn9/imagen-2024-05-07-094155781.png">
+        <img class="triviaImagen"src="imagenes/logo.png">
 
-        <div>
-        <a class="links" href="descripcion">Información General</a>
-        <a class="links"href="descripcion">Administrar</a>
-        <a class="links"href="descripcion">¡Jugar! </a>
-        </header>
+        <nav>
+            <menu>
+                <li><a href="#descripcion">Información General</a> </li>
+                <li><a href="#gestion">Administrar</a> </li>
+                <li><a href="#jugar">¡Jugar!</a> </li>
+            </menu>
+        </nav>
+    </header>
 
 <!-- DESCRIPCION -->
     <div  id="descripcion">
@@ -27,8 +42,9 @@
             <p>Cada tema tiene un nombre y una descripcion. Cada pregunta es de un tema, tiene un nivel (1-muy fácil, ..., 5-muy difícil), un texto que la describe y te aparecerán varias respuestas, pero una sola es la correcta.
                 Si la respondes bien, sumas 10 puntos, por cada error pierdes un punto, ¡pero puede usar la ayuda!. </p>
             <p>El sitio fue desarrollado en el 1er. semestre 2024 - Programacion I - Universidad ORT Uruguay por:</p>
+            
             <div class="estudiantes">
-                <img src="imagenes/pfp.png" alt="">  Nombre Apellido N° 999999 y  <img src="imagenes/pfp.png" alt="">  Nombre Apellido N° 999999 
+                <img src="imagenes/pfp.png" alt="">  Nombre Apellido N° 999999 y  <img src="imagenes/luis.png" alt="">  Luis Gagñevin N° 338643
             </div>
     </div>
 
@@ -62,49 +78,53 @@
 
 <!-- GESTION DE PREGUNTAS -->
 
-         <div id="gestionPreguntas">
-        <h1>GESTIÓN DE PREGUNTAS</h1>
-        <h3>Alta de preguntas</h3>
-        <form class="preguntas">
-            <label for="temaPreguntas">Tema</label>
-            <select name="dropdown" class="margen anchobox" id="temaePreguntas">
-            </select> 
-            <label for="nivel">Nivel</label>
-            <input type="text" class="margen anchobox" id="nivel"> <br>
-            <label for="textoPregunta">Texto de la pregunta </label> 
-            <input type="text" class="margen anchobox" id="textoPregunta"> 
-            <label for="respuestaCorrecta">Resupuesta correcta </label> 
-            <input type="text" id="respuestaCorrecta"> 
-            <label for="respuestaIncorrecta">Resupuesta incorrecta </label> 
-            <input type="text" id="respuestaIncorrecta"> 
-            <button>Agregar</button>
-        </form>
+        <div id="gestionPreguntas">
+            <h1>GESTIÓN DE PREGUNTAS</h1>
+            <h3>Alta de preguntas</h3>
+            <form class="preguntas">
+                <label for="temaPreguntas">Tema</label>
+                <select name="dropdown" class="margen anchobox" id="temaPreguntas">
+                </select> 
+                
+                <label for="nivel">Nivel</label>
+                <input type="number" min="1" max="5" class="margen" id="nivel">    
+                
+                <br>        
+                
+                <label for="textoPregunta">Texto de la pregunta </label> 
+                <input type="text" class="margenp anchobox" id="textoPregunta"> 
 
-        <h3>Datos generales de preguntas</h3>
-        <p>Total de preguntas registradas: 0 preguntas</p>
-        <p>Máximo puntaje obtenido por un jugador: sin datos</p> <br>
+                <label for="respuestaCorrecta">Resupuesta correcta </label> 
+                <input type="text" class="margenp anchobox" id="respuestaCorrecta"> 
 
-        <div id="preguntasRegistradasDiv">
-            <p> Preguntas registradas: </p> 
-            <input type="radio" id="preguntasRegistradas"> 
-            <label for="preguntasRegistradas"> Orden nombre tema creciente/nivel creciente </label>
-            <input type="radio" id="preguntasRegistradas"> 
-            <label for="preguntasRegistradas"> Orden nombre tema decreciente/nivel creciente </label> 
+                <label for="respuestaIncorrecta">Resupuesta incorrecta </label> 
+                <input type="text" class="margenp anchobox" id="respuestaIncorrecta"> 
+                <button>Agregar</button>
+            </form>
 
-        </div>
-        <div>
-            <table id="tablaPreguntas">
-                <tr>
-                  <th>Nombre del Tema</th>
-                  <th>Nivel</th>
-                  <th>Texto de la pregunta</th>
-                  <th>Respuesta correcta</th>
-                  <th>Respuesta incorrecta</th>
-                </tr>
+            <h3>Datos generales de preguntas</h3>
+            <p>Total de preguntas registradas: 0 preguntas</p>
+            <p>Máximo puntaje obtenido por un jugador: sin datos</p> 
 
-              </table>
+            <form id="preguntasRegistradas">
+            Preguntas registradas: 
+                <input type="radio" id="opcion1" name="opciones" value="1"> 
+                <label for="opcion1"> Orden nombre tema creciente/nivel creciente </label>
+                <input type="radio" id="opcion2" name="opciones" value="0"> 
+                <label for="opcion2"> Orden nombre tema decreciente/nivel creciente </label> 
 
-        </div>
+            </form>
+                <table id="tablaPreguntas">
+                    <thead>
+                    <tr>
+                    <th>Nombre del Tema</th>
+                    <th>Nivel</th>
+                    <th>Texto de la pregunta</th>
+                    <th>Respuesta correcta</th>
+                    <th>Respuesta incorrecta</th>
+                    </tr>
+                    </thead>
+                </table>
         </div>
     </div>
 

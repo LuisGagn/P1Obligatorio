@@ -16,78 +16,67 @@ body {
 }
 h1 {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.336);
-  
+    padding: 10px;
+    padding-bottom: 10px ;
 }
 h1,
 h3 {
     text-align: center;
     
 }
+
 /* Encabezado */
-
 header {
-
+    max-height: 120px;
     background-color: #F4a573;
     text-align: center;
 }
 
-#triviaImagen {
-
-    display: flex;
-    margin: 0 auto;
-    width: 15%;
-
+.triviaImagen {
+    max-height: 75px;
 }
-.links {
-
+menu li{
     display: inline;
-    margin: 0 15px
-    
+    margin:0 15px;
 }
+
 
 /* Descripcion */
-
 #descripcion {
     background-color: #f6f1db;
 }
 .estudiantes img{
     max-width: 50px;
     margin: 10px;
+    border-radius: 50px;
 }
 .estudiantes{ 
     display: flex;
     height: 100px;
     align-items: center;
 }
+
+
 /* Gestion */
 #gestion {
     background-color: #ffd388;
 }
+
+
 /* Gestion Preguntas */
-
-
 #gestionPreguntas {
     background-color: #ffd388;
-    
 }
 #tablaPreguntas {
     background-color: #ffd388;
     border: 2px solid black;
-    display: flex;
-    border-collapse: collapse;
-
+    width: 100%;
+    padding-bottom: 100px;
 }
+
 th{
     background-color: whitesmoke;
     border: 1px solid black;
-    width: 10%;
-
-}
-
-#preguntasRegistradasDiv {
-
-    box-shadow: 1px 1px 5px rgb(255, 255, 255);
-    display: flex;
 }
 
 
