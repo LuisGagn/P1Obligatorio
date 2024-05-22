@@ -5,6 +5,7 @@ OBLIGATORIO PROGRAMACION 1
     LUIS GAGÑEVIN N°338643 
 */
 
+
 /* Generales */
 body {
     font-family: Arial;
@@ -19,7 +20,7 @@ body {
     margin-left: 7.6%;
 }
 .margenp{
-    margin-left: 2%;
+    margin-left: 2.1%;
 }
 h1 {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.336);
@@ -79,12 +80,6 @@ menu li{
     border: 2px solid black;
     width: 100%;
     padding-bottom: 100px;
-}
-#campoTemas{
-    margin-right: 25px;
-}
-#campoNivel{
-    margin-right: 21px;
 }
 th{
     background-color: whitesmoke;
