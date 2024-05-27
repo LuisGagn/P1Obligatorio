@@ -53,9 +53,9 @@
         <h3>Alta de temas</h3>
         <form class="temas">
             <label for="nombre">Nombre</label>
-            <input type="text" class="margen anchobox" id="nombre"> 
+            <input type="text" class="margen anchobox" id="nombre" required> 
             <label for="desc">Descripción</label> 
-            <input type="text" class="margen anchobox" id="desc"> 
+            <input type="text" class="margen anchobox" id="desc" required> 
             <button>Agregar</button>
         </form>
         <h3>Datos generales de temas</h3>
@@ -80,18 +80,18 @@
                 </select> 
                 
                 <label for="nivel">Nivel</label>
-                <input type="number" min="1" max="5" class="margen" id="nivel">    
+                <input type="number" min="1" max="5" class="margen" id="nivel" required>    
                 
                 <br>        
                 
                 <label for="textoPregunta">Texto de la pregunta</label> 
-                <input type="text" class="margenp anchobox" id="textoPregunta"> 
+                <input type="text" class="margenp anchobox" id="textoPregunta" required> 
 
                 <label for="respuestaCorrecta">Respuesta correcta</label> 
-                <input type="text" class="margenp anchobox" id="respuestaCorrecta"> 
+                <input type="text" class="margenp anchobox" id="respuestaCorrecta" required> 
 
                 <label for="respuestaIncorrecta">Respuestas incorrectas </label> 
-                <input type="text" class="margenp anchobox" id="respuestaIncorrecta"> 
+                <input type="text" class="margenp anchobox" id="respuestaIncorrecta" required> 
                 <button>Agregar</button>
             </form>
 
@@ -101,7 +101,7 @@
 
             <form id="preguntasRegistradas">
             Preguntas registradas: 
-                <input type="radio" id="opcion1" name="opciones" value="1"> 
+                <input type="radio" id="opcion1" name="opciones" value="1" checked> 
                 <label for="opcion1"> Orden nombre tema creciente/nivel creciente </label>
                 <input type="radio" id="opcion2" name="opciones" value="0"> 
                 <label for="opcion2"> Orden nombre tema decreciente/nivel creciente </label> 
@@ -130,10 +130,10 @@
 
     <form class="seleccion">
             <label for="temaelegir">Tema a elegir</label>
-            <select name="dropdown" class="margen anchobox" id="temaelegir">
+            <select name="dropdown" class="margen anchobox" id="temaelegir" >
             </select> 
             <label for="lvl">Nivel del juego</label>
-            <input type="number" value="1" min="1" max="5" class="margen" id="lvl">
+            <input type="number" value="1" min="1" max="5" class="margen" id="lvl" required>
             <button>Jugar</button>
         </form>
 
