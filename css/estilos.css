@@ -52,6 +52,8 @@ menu li{
 /* Descripcion */
 #descripcion {
     background-color: #f6f1db;
+    display: block;
+
 }
 .estudiantes img{
     max-width: 50px;
@@ -68,6 +70,7 @@ menu li{
 /* Gestion */
 #gestion {
     background-color: #ffd388;
+    display: none;
 }
 
 
@@ -93,9 +96,11 @@ th{
 #jugar{
     background-color: #fddac6;
     padding-bottom: 10px;
+    display: none;
 }
 .juego{
     text-align: center;
+    
 }
 .pregunta {
     margin: auto;
