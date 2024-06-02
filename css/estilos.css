@@ -52,8 +52,7 @@ menu li{
 /* Descripcion */
 #descripcion {
     background-color: #f6f1db;
-    display: block;
-
+    display: none;
 }
 .estudiantes img{
     max-width: 50px;
@@ -70,7 +69,7 @@ menu li{
 /* Gestion */
 #gestion {
     background-color: #ffd388;
-    display: none;
+    display: block;
 }
 
 
@@ -78,11 +77,22 @@ menu li{
 #gestionPreguntas {
     background-color: #ffd388;
 }
-#tablaPreguntas {
-    background-color: #ffd388;
+
+.tablaScroll{
+    height: 200px;
+    overflow-y: auto;
     border: 2px solid black;
+    
+}
+thead{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+table {
+    background-color: #ffd388;
     width: 100%;
-    padding-bottom: 100px;
 }
 th{
     background-color: whitesmoke;
@@ -92,6 +102,11 @@ th{
     margin-bottom: 15px;
 }
 
+tbody td{
+    border: 1px solid black;
+}
+
+
 /* Jugar */
 #jugar{
     background-color: #fddac6;
@@ -100,7 +115,6 @@ th{
 }
 .juego{
     text-align: center;
-    
 }
 .pregunta {
     margin: auto;

@@ -56,19 +56,19 @@
         <h3>Alta de temas</h3>
         <form class="temas">
             <label for="nombre">Nombre</label>
-            <input type="text" class="margen anchobox" id="nombre"> 
+            <input type="text" class="margen anchobox" id="nombre" required> 
             <label for="desc">Descripción</label> 
-            <input type="text" class="margen anchobox" id="desc"> 
-            <button>Agregar</button>
+            <input type="text" class="margen anchobox" id="desc" required> 
+            <button type="submit" id="addTema">Agregar</button>
         </form>
         <h3>Datos generales de temas</h3>
-        <p>Lista de temas (total de temas: 0)</p>
-            <ul>
+        <p>Lista de temas (total de temas: <a id="TotaldeTemas">0</a>)</p>
+            <ul id="todosLosTemas">
                 <li>Sin Datos</li>
             </ul>
-        <p>Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): sin datos</p>
+        <p>Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): <a id="promedio">Sin Datos</a></p>
         <p>Temas sin preguntas:</p>
-            <ul>
+            <ul id="temasVacios">
                 <li>Sin Datos</li>
             </ul>
 
@@ -79,38 +79,39 @@
             <h3>Alta de preguntas</h3>
             <form class="preguntas">
                 <label for="temaPreguntas">Tema</label>
-                <select name="dropdown" class="margen anchobox" id="temaPreguntas">
+                <select name="dropdown" class="margen anchobox" id="temaPreguntas" required>
                 </select> 
                 
                 <label for="nivel">Nivel</label>
-                <input type="number" min="1" max="5" class="margen" id="nivel">    
+                <input type="number" min="1" max="5" class="margen" id="nivel" required>    
                 
                 <br>        
                 
                 <label for="textoPregunta">Texto de la pregunta</label> 
-                <input type="text" class="margenp anchobox" id="textoPregunta"> 
+                <input type="text" class="margenp anchobox" id="textoPregunta" required> 
 
                 <label for="respuestaCorrecta">Respuesta correcta</label> 
-                <input type="text" class="margenp anchobox" id="respuestaCorrecta"> 
+                <input type="text" class="margenp anchobox" id="respuestaCorrecta" required> 
 
                 <label for="respuestaIncorrecta">Respuestas incorrectas </label> 
-                <input type="text" class="margenp anchobox" id="respuestaIncorrecta"> 
-                <button>Agregar</button>
+                <input type="text" class="margenp anchobox" id="respuestaIncorrecta" required> 
+                <button type="submit" id="addPregunta">Agregar</button>
             </form>
 
             <h3>Datos generales de preguntas</h3>
-            <p>Total de preguntas registradas: 0 preguntas</p>
-            <p>Máximo puntaje obtenido por un jugador: sin datos</p> 
+            <p>Total de preguntas registradas: <a id="cantidadPreguntas">0</a> preguntas</p>
+            <p>Máximo puntaje obtenido por un jugador: <a id="maximoPuntaje">sin datos</a></p> 
 
             <form id="preguntasRegistradas">
             Preguntas registradas: 
-                <input type="radio" id="opcion1" name="opciones" value="1"> 
+                <input type="radio" id="opcion1" name="opciones" value="1" checked> 
                 <label for="opcion1"> Orden nombre tema creciente/nivel creciente </label>
                 <input type="radio" id="opcion2" name="opciones" value="0"> 
                 <label for="opcion2"> Orden nombre tema decreciente/nivel creciente </label> 
 
             </form>
-                <table id="tablaPreguntas">
+            <div class="tablaScroll">
+                <table>
                     <thead>
                     <tr>
                     <th>Nombre del Tema</th>
@@ -120,7 +121,11 @@
                     <th>Respuesta incorrecta</th>
                     </tr>
                     </thead>
+                    <tbody id="tablaPreguntas">
+
+                    </tbody>
                 </table>
+            </div>
         </div>
     </div>
 
@@ -132,8 +137,8 @@
         <h3>Configuracion</h3>
 
     <form class="seleccion">
-            <label for="temaelegir">Tema a elegir</label>
-            <select name="dropdown" class="margen anchobox" id="temaelegir">
+            <label for="temaElegir">Tema a elegir</label>
+            <select name="dropdown" class="margen anchobox" id="temaElegir">
             </select> 
             <label for="lvl">Nivel del juego</label>
             <input type="number" value="1" min="1" max="5" class="margen" id="lvl">
