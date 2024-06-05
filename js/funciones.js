@@ -4,23 +4,28 @@ window.addEventListener("load", inicio);
     let liTemas = new Sistema();
     let inicializado=false;
     let creandoTema= true;
-
+    let puntajeTotal = 0;
+    let puntajeMaximo = 0;
+    let preguntasFiltradas =[];
+    let i =0;
 
 function inicio() {
     document.getElementById("seccionDescripcion").addEventListener('click', function() {
-        mostrar("descripcion");
+        mostrar("descripcion"); reiniciarJuego();
     });
     document.getElementById("seccionGestion").addEventListener('click', function() {
-        mostrar("gestion");
+        mostrar("gestion"); reiniciarJuego()
     });
     document.getElementById("seccionJugar").addEventListener('click', function() {
-        mostrar("jugar");
+        mostrar("jugar"); 
     });
 
     document.getElementById("addTema").addEventListener('click', function() {agregarTema()});
     document.getElementById("addPregunta").addEventListener('click', function() {agregarPregunta()});
     document.getElementById("opcion1").addEventListener('click',  function() {listarPreguntas()});
     document.getElementById("opcion2").addEventListener('click', function() {listarPreguntas()});
+    document.getElementById("comenzar").addEventListener('click', function(){juego()});
+    document.getElementById("terminar").addEventListener('click', function(){terminarJuego()})
 
     // Selecciona si cargar o no los datos
     if(confirm("¿Desea cargar los datos guardados?")){
@@ -121,11 +126,14 @@ function listarTemas(){
         dpmenu.value=""
 
         // Lista los temas en Jugar
+        if (i.cantidadPreguntas > 0){
         nodoJ=document.createElement("option")
         textoJ=document.createTextNode(i.nombre);
         nodoJ.appendChild(textoJ);
         dpjugar.appendChild(nodoJ)
+        }
         dpjugar.value=""
+        
     }
     
 // Agrega el total de temas.
@@ -253,7 +261,6 @@ function stringToHexColor(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
         hash = str.charCodeAt(i) + ((hash << 5) - hash);
-        console.log(hash)
     }
     
     // Convert the numeric value to a hexadecimal color code
@@ -342,22 +349,199 @@ if(mismaPregunta){
 }else{
     return false
 }
+}
 
 
+// |----------------------------------------------------------------------------------------------------------------------------|
+// |                                  JUEGO-JUEGO-JUEGO-JUEGO-JUEGO-JUEGO-JUEGO-JUEGO-JUEGO-JUEGO                               |
+// |----------------------------------------------------------------------------------------------------------------------------|
 
 
+// Filtra preguntas por tema y luego por nivel y las ordena al azar
+function filtrado(tema,nivel){
+    let temasFiltrados = liTemas.showPreguntas().filter(pregunta => pregunta.nombreTema === tema);
+    let nivelFiltrado = temasFiltrados.filter(pregunta => pregunta.lvl === nivel);
+    let preguntasMezcladas = shuffleArray(nivelFiltrado);
+    return preguntasMezcladas
+}
 
 
+// Ordena las respuestas de cada pregunta al azar
+function opciones(pregunta){
+    let respuestas = [];
+    respuestas.push(pregunta.respuestaCorrecta);
+    respuestas=respuestas.concat(pregunta.respuestasIncorrectas);
+    let respuestasMezcladas = shuffleArray(respuestas);
+    return respuestasMezcladas
+}
+
+// Reordena al azar un array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+}
 
 
+// Muestra las preguntas y respuestas en la pagina.
+function mostrarPregunta(pregunta){
+
+    document.getElementById("mostrarPregunta").innerHTML=pregunta.texto;
+    colorTemas(pregunta.nombreTema, document.getElementById("cajaPregunta"))
+
+    let botones = document.getElementById("respuestas");
+    let respuestas = opciones(pregunta);
+    botones.innerHTML=""
+
+    for (let i of respuestas){
+        let nodo = document.createElement("button");
+        let nodoTexto = document.createTextNode(i);
+        nodo.appendChild(nodoTexto);
+        botones.appendChild(nodo);
+
+        colorTemas(pregunta.nombreTema, nodo)
+        
+        if(pregunta.respuestaCorrecta == i){
+            nodo.onclick = function (){correcta(nodo)}
+        } else {
+            nodo.onclick = function (){incorrecta(nodo)}
+        };
+    };
+};
 
 
+// Color + Sonido + Puntaje + Inhabilitacion de botones segun respuestas.
+// Correcta
+function correcta(respuesta){
+    respuesta.style.backgroundColor = "green";
+    puntajeTotal += 10;
+
+    if(puntajeTotal>=0){
+        document.getElementById("puntajeAcumulado").innerHTML=puntajeTotal;
+    };
+    document.querySelectorAll('div#respuestas button').forEach(button => button.disabled = true);
+    sonido(true)
+}
+
+// Incorrecta
+function incorrecta(respuesta){
+    respuesta.style.backgroundColor = "red";
+    respuesta.disabled = true;
+    puntajeTotal -=1;
+
+    if(puntajeTotal>=0){
+        document.getElementById("puntajeAcumulado").innerHTML=puntajeTotal;
+    }    
+    sonido(false)
+}
+
+// Reproduce sonido segun si la pregunta fue correcta o incorrecta
+function sonido(estado){
+    let audioCorrecto = document.getElementById("audioCorrecta");
+    let audioIncorrecto = document.getElementById("audioIncorrecta");
+    
+    if (estado){
+        audioCorrecto.play();
+    } else {
+        audioIncorrecto.play();
+    }
+}
 
 
+// Funcion principal del juego
+function juego(){
+    let tema = document.getElementById("temaElegir").value;
+    let nivel = parseInt(document.getElementById("lvl").value);
+    let siguientePregunta = document.getElementById("siguiente");
 
+    // Variables globales -> Al terminar el juego la deja en 0 o vacia.
+    preguntasFiltradas = filtrado(tema,nivel); 
+    i=0;
+
+    // Actualiza la pregunta que esta dentro de el boton de ayuda.
+    function actualizarAyuda(){    
+        document.getElementById("help").onclick=function(){
+            ayuda(preguntasFiltradas[i])
+        };
+}
+    // Verifica que exista almenos una pregunta.
+    if(preguntasFiltradas.length > 0) {
+        document.getElementById("mostrarJuego").style="display: block";
+        document.getElementById("seleccion").querySelectorAll("input,button,select").forEach(item => item.disabled=true);
+
+        mostrarPregunta(preguntasFiltradas[i]);
+        actualizarAyuda();
+
+        if (preguntasFiltradas.length==1){
+            siguientePregunta.disabled=true;
+        }
+
+        siguientePregunta.onclick= function(){
+
+            if(i< preguntasFiltradas.length-1){
+                i++;
+                mostrarPregunta(preguntasFiltradas[i]);
+                actualizarAyuda();
+            }
+
+            if (i === preguntasFiltradas.length-1){
+                siguientePregunta.disabled=true;
+            }
+        }
+    }else{        
+        alert("No hay preguntas para dicha combinacion de Tema/Nivel")
+    }
+        
+}
+
+
+// Funcion de ayuda que muestra respuesta correcta segun primer letra o numero que no es respuesta.
+function ayuda(solucion){
+    if(solucion.respuestaCorrecta.length == 1){
+        alert("La respuesta no es: " + solucion.respuestasIncorrectas[0]);
+    } else {
+        let = letraInicial = solucion.respuestaCorrecta.charAt(0);
+        alert("La respuesta comienza con: "+ letraInicial+"...")
+    }
 
 }
 
 
+// Reinicia el juego para volver a comenzar.
+function reiniciarJuego(){
+
+    // Borra los valores ya existentes
+    document.getElementById("temaElegir").value="";
+    document.getElementById("lvl").value=1;
+    preguntasFiltradas = [];
+    i = 0;
+    document.getElementById("help").onclick = null;
+    document.getElementById("siguiente").onclick = null;
+
+    // Habilita los input y botones.
+    document.getElementById("seleccion").querySelectorAll("input,button,select").forEach(item => item.disabled=false);
+    document.getElementById("siguiente").disabled=false;
+
+    // Setea el puntaje total en 0 nuevamente
+    puntajeTotal=0;
+    document.getElementById("puntajeAcumulado").innerHTML = puntajeTotal;
+
+    // Oculta el juego
+    document.getElementById("mostrarJuego").style="display: none"
+
+}
 
 
+// Finaliza el juego
+function terminarJuego(){
+ 
+    if(puntajeTotal > puntajeMaximo) {
+        document.getElementById("maximoPuntaje").innerHTML=puntajeTotal;
+    } 
+
+    alert("Juego terminado, puntaje obtejido: "+ puntajeTotal+"!! Felicitaciones")
+    reiniciarJuego()
+
+}

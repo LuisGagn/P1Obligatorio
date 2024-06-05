@@ -79,7 +79,7 @@
             <h3>Alta de preguntas</h3>
             <form class="preguntas">
                 <label for="temaPreguntas">Tema</label>
-                <select name="dropdown" class="margen anchobox" id="temaPreguntas" required>
+                <select name="dropdown" class="margen anchobox" id="temaPreguntas">
                 </select> 
                 
                 <label for="nivel">Nivel</label>
@@ -136,34 +136,36 @@
         <h1>¡A JUGAR!</h1>
         <h3>Configuracion</h3>
 
-    <form class="seleccion">
+    <form class="seleccion" id="seleccion">
             <label for="temaElegir">Tema a elegir</label>
             <select name="dropdown" class="margen anchobox" id="temaElegir">
             </select> 
             <label for="lvl">Nivel del juego</label>
-            <input type="number" value="1" min="1" max="5" class="margen" id="lvl">
-            <button>Jugar</button>
+            <input type="number" value="1" min="1" max="5" class="margen" id="lvl" required>
+            <button type="button" id="comenzar">Jugar</button>
         </form>
-
+        <div id="mostrarJuego">
         <h3>Juego</h3>
 
-        <p> Puntaje acumulado en esta partida : 0</p>
-        <p> La pregunta es...:</p>
+        <p> Puntaje acumulado en esta partida : <a id="puntajeAcumulado">0</a></p>
+        <p> La pregunta es:</p>
 
 
         <div class="juego">
-            <div class="pregunta">
-                <p>TEXTO DE LA PREGUNTA</p>
+            <div class="pregunta" id="cajaPregunta">
+                <p id="mostrarPregunta">TEXTO DE LA PREGUNTA</p>
             </div>
-            <div class="respuestas">
+            <div class="respuestas" id="respuestas">
                 <button>Respuesta 1</button> <button>Respuesta 2</button> <button>Respuesta 3</button>
             </div>
-            <div>
-                <button>Ayuda</button> <button>Siguiente pregunta</button> <button>Terminar</button>
+            <div id="botonesSecundarios">
+                <button type="button" id="help">Ayuda</button> <button type="button" id="siguiente">Siguiente pregunta</button> <button type="button" id="terminar">Terminar</button>
             </div>
         </div>
     </div>
-
+</div>
+    <audio id="audioCorrecta"><source src="audio/correcta.mp3" type="audio/mpeg"></audio>
+    <audio id="audioIncorrecta"><source src="audio/incorrecta.mp3" type="audio/mpeg"></audio>
 
 </body>
 </html>
