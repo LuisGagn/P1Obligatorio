@@ -75,7 +75,8 @@ function inicializar() {
     // Carga las preguntas guardadas
     for(let i = 0; i < preguntas.length; i++) {
         let {texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema} = preguntas[i];
-        crearPregunta(texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema.nombre);
+        //crearPregunta(texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema.nombre);
+        crearPregunta(texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema);
     }
 
     // Lista los temas y preguntas y cambia el verificador que ya se inicializo el programa
@@ -212,16 +213,74 @@ function listarPreguntas(){
         let celdaCorrecta = pregunta.insertCell(3);
         let celdaIncorecta = pregunta.insertCell(4);
 
-        celdaTema.textContent = i.nombreTema;
+        celdaTema.textContent = i.tema.nombre;
         celdaNivel.textContent = i.lvl;
         celdaTexto.textContent = i.texto;
         celdaCorrecta.textContent = i.respuestaCorrecta;
         celdaIncorecta.textContent = i.respuestasIncorrectas;
-        colorTemas(i.nombreTema, pregunta)
+        colorTemas2(i.tema.nombre, pregunta)
     }
 // Muestra total de las preguntas
     document.getElementById("cantidadPreguntas").innerHTML= liTemas.showPreguntas().length
 }
+
+
+function colorTemas2(tema, cellData){
+
+    indexTema = liTemas.showLista().findIndex(item=> item.nombre == tema)
+
+    switch(indexTema){
+        case 0:
+            cellData.style = "background-color: #FFFF00;";
+            break;
+        case 1:
+            cellData.style = "background-color: #FFD700;"; 
+            break;
+        case 2:
+            cellData.style = "background-color: #FFC000;"; 
+            break;
+        case 3:
+            cellData.style = "background-color: #FFB000;"; 
+            break;
+        case 4:
+            cellData.style = "background-color: #FFA000;"; 
+            break;
+        case 5:
+            cellData.style = "background-color: #FF9000;"; 
+            break;
+        case 6:
+            cellData.style = "background-color: #FF8000;"; 
+            break;
+        case 7:
+            cellData.style = "background-color: #FF7000;"; 
+            break;
+        case 8:
+            cellData.style = "background-color: #FF6000;"; 
+            break;
+        case 9:
+            cellData.style = "background-color: #FF5000;"; 
+            break;
+        case 10:
+            cellData.style = "background-color: #FF4000;"; 
+            break;
+        case 11:
+            cellData.style = "background-color: #FF3000;"; 
+            break;
+        case 12:
+            cellData.style = "background-color: #FF2000;"; 
+            break;
+        case 13:
+            cellData.style = "background-color: #FF1000;"; 
+            break;
+        case 14:
+            cellData.style = "background-color: #8B4513;"; 
+            break;
+        default:
+            cellData.style = "background-color: #FFFFFF;"; 
+    }
+}
+
+
 
 // Cambia el color de cada fila de la tabla segun el tema y genera uno nuevo para proximos temas.
 function colorTemas(rowData, cellData){
@@ -281,6 +340,9 @@ function agregarPregunta(){
     let nivelPregunta   = parseInt(document.getElementById("nivel").value);
     let temaSeleccionado = document.getElementById("temaPreguntas").value;
 
+
+    
+
 // Verifica que todos los campos esten completos
     if(textoPregunta != "" && respuestaPregunta != "" && 
     incorrectasPregunta != "" && nivelPregunta != "" && 
@@ -289,6 +351,11 @@ function agregarPregunta(){
     if (!validarPregunta(temaSeleccionado,textoPregunta)){
 // Verifica que la respuesta no este en las opciones incorrectas
         if (incorrectasPregunta.indexOf(respuestaPregunta)==-1){
+
+            nombre=liTemas.showLista().filter(tema =>  tema.nombre== temaSeleccionado)[0]['nombre']
+            descripcion=liTemas.showLista().filter(tema =>  tema.nombre== temaSeleccionado)[0]['descripcion']
+            temaSeleccionado={nombre,descripcion}
+
             crearPregunta(textoPregunta, respuestaPregunta, incorrectasPregunta, nivelPregunta, temaSeleccionado)
 
 // Deja los campos en blanco
@@ -314,26 +381,26 @@ function ordenarPreguntas(listaDePreguntas){
     let creciente = document.getElementById("opcion1");
     if(creciente.checked){
         listaDePreguntas.sort((a, b) => {
-            // First, compare by nombreTema
-            if (a.nombreTema < b.nombreTema) {
+            // First, compare by tema.nombre
+            if (a.tema.nombre < b.tema.nombre) {
                 return -1;
             }
-            if (a.nombreTema > b.nombreTema) {
+            if (a.tema.nombre > b.tema.nombre) {
                 return 1;
             }
-            // If nombreTema is the same, compare by lvl
+            // If tema.nombre is the same, compare by lvl
             return a.lvl - b.lvl;
         });
     }else{
         listaDePreguntas.sort((a, b) => {
-            // First, compare by nombreTema
-            if (a.nombreTema > b.nombreTema) {
+            // First, compare by tema.nombre
+            if (a.tema.nombre > b.tema.nombre) {
                 return -1;
             }
-            if (a.nombreTema < b.nombreTema) {
+            if (a.tema.nombre < b.tema.nombre) {
                 return 1;
             }
-            // If nombreTema is the same, compare by lvl
+            // If tema.nombre is the same, compare by lvl
             return a.lvl - b.lvl;
         });
     }
@@ -342,7 +409,7 @@ function ordenarPreguntas(listaDePreguntas){
 
 // Valida que la pregunta no exista para el mismo tema.
 function validarPregunta (tema, enunciado) {
-let temasFiltrados = liTemas.showPreguntas().filter(pregunta => pregunta.nombreTema === tema);
+let temasFiltrados = liTemas.showPreguntas().filter(pregunta => pregunta.tema.nombre === tema);
 let mismaPregunta = temasFiltrados.find(pregunta => pregunta.texto === enunciado);
 if(mismaPregunta){
     return true
@@ -359,7 +426,7 @@ if(mismaPregunta){
 
 // Filtra preguntas por tema y luego por nivel y las ordena al azar
 function filtrado(tema,nivel){
-    let temasFiltrados = liTemas.showPreguntas().filter(pregunta => pregunta.nombreTema === tema);
+    let temasFiltrados = liTemas.showPreguntas().filter(pregunta => pregunta.tema.nombre === tema);
     let nivelFiltrado = temasFiltrados.filter(pregunta => pregunta.lvl === nivel);
     let preguntasMezcladas = shuffleArray(nivelFiltrado);
     return preguntasMezcladas
@@ -389,7 +456,7 @@ function shuffleArray(array) {
 function mostrarPregunta(pregunta){
 
     document.getElementById("mostrarPregunta").innerHTML=pregunta.texto;
-    colorTemas(pregunta.nombreTema, document.getElementById("cajaPregunta"))
+    colorTemas2(pregunta.tema.nombre, document.getElementById("cajaPregunta"))
 
     let botones = document.getElementById("respuestas");
     let respuestas = opciones(pregunta);
@@ -401,7 +468,7 @@ function mostrarPregunta(pregunta){
         nodo.appendChild(nodoTexto);
         botones.appendChild(nodo);
 
-        colorTemas(pregunta.nombreTema, nodo)
+        colorTemas2(pregunta.tema.nombre, nodo)
         
         if(pregunta.respuestaCorrecta == i){
             nodo.onclick = function (){correcta(nodo)}

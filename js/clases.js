@@ -6,15 +6,14 @@ class Temas {
     }
 }
 
-
 class Preguntas {
 
-    constructor(texto, respuestaCorrecta, respuestasIncorrectas, lvl, nombreTema){
+    constructor(texto, respuestaCorrecta, respuestasIncorrectas, lvl, tema){
         this.texto = texto;
         this.respuestaCorrecta = respuestaCorrecta;
         this.respuestasIncorrectas = respuestasIncorrectas;
         this.lvl = lvl;
-        this.nombreTema = nombreTema;
+        this.tema = tema;
     }
 }
 
@@ -64,7 +63,7 @@ class Sistema {
         this.listaPreguntas.push(valor);
 
         if (inicializado){
-            this.sumarPregunta(valor.nombreTema)
+            this.sumarPregunta(valor.tema.nombre)
 
         }
         
