@@ -1,9 +1,14 @@
+// OBLIGATORIO PROGRAMACION 1 
+// REALIZADO POR:
+// EMILIANO MEDERO N° 310016
+// LUIS GAGÑEVIN N°338643
+
+// VER PARA QUE SIRVE LINEA 103
 window.addEventListener("load", inicio);
 
-// Variables Globales van aca
-    let liTemas = new Sistema();
+// Variables Globales
+    let sistema = new Sistema();
     let inicializado=false;
-    let creandoTema= true;
     let puntajeTotal = 0;
     let puntajeMaximo = 0;
     let preguntasFiltradas =[];
@@ -11,21 +16,22 @@ window.addEventListener("load", inicio);
 
 function inicio() {
     document.getElementById("seccionDescripcion").addEventListener('click', function() {
-        mostrar("descripcion"); reiniciarJuego();
+        mostrar("descripcion"); terminarJuego(false);
     });
     document.getElementById("seccionGestion").addEventListener('click', function() {
-        mostrar("gestion"); reiniciarJuego()
+        mostrar("gestion"); terminarJuego(false)
     });
     document.getElementById("seccionJugar").addEventListener('click', function() {
         mostrar("jugar"); 
     });
+
 
     document.getElementById("addTema").addEventListener('click', function() {agregarTema()});
     document.getElementById("addPregunta").addEventListener('click', function() {agregarPregunta()});
     document.getElementById("opcion1").addEventListener('click',  function() {listarPreguntas()});
     document.getElementById("opcion2").addEventListener('click', function() {listarPreguntas()});
     document.getElementById("comenzar").addEventListener('click', function(){juego()});
-    document.getElementById("terminar").addEventListener('click', function(){terminarJuego()})
+    document.getElementById("terminar").addEventListener('click', function(){terminarJuego(true)})
 
     // Selecciona si cargar o no los datos
     if(confirm("¿Desea cargar los datos guardados?")){
@@ -75,7 +81,6 @@ function inicializar() {
     // Carga las preguntas guardadas
     for(let i = 0; i < preguntas.length; i++) {
         let {texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema} = preguntas[i];
-        //crearPregunta(texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema.nombre);
         crearPregunta(texto, respuestaCorrecta, respuestasIncorrectas, nivel, tema);
     }
 
@@ -92,11 +97,10 @@ function inicializar() {
 
 
     // Crea cada Tema y los guarda en una lista con los temas y un contador numerico de cantidad de preguntas.
-    // Se accede usando liTemas.showLista()
+    // Se accede usando sistema.showLista()
 function crearTema(nTema, dTema){
-    creandoTema= true;
     let nuevoTema = new Temas(nTema, dTema);
-    liTemas.addLista(nuevoTema);
+    sistema.addLista(nuevoTema);
 }
 
 
@@ -112,7 +116,7 @@ function listarTemas(){
     dpmenu.innerHTML="";
     dpjugar.innerHTML="";
     
-    for (let i of liTemas.showLista()){
+    for (let i of sistema.showLista()){
         // Lista los temas en Gestion de Temas
         nodo=document.createElement("LI");
         texto=document.createTextNode(i.nombre+": "+i.descripcion);
@@ -138,21 +142,21 @@ function listarTemas(){
     }
     
 // Agrega el total de temas.
-    document.getElementById("TotaldeTemas").innerHTML=liTemas.showLista().length
+    document.getElementById("TotaldeTemas").innerHTML=sistema.showLista().length
 
 // Agrega el promedio de preguntas
     let preguntasTotales = 0;
-    for(let i of liTemas.showLista()){
+    for(let i of sistema.showLista()){
         preguntasTotales+=i.cantidadPreguntas;
     }
-    let promedio = preguntasTotales/liTemas.showLista().length
+    let promedio = preguntasTotales/sistema.showLista().length
     document.getElementById("promedio").innerHTML=promedio.toFixed(2)
 
 // Lista Temas sin preguntas
     let listaVacia = document.getElementById("temasVacios")
     
     noExiste=true;
-    for (let i of liTemas.showLista()){
+    for (let i of sistema.showLista()){
         if (i.cantidadPreguntas==0){
             // No borrar "Sin Datos" si no hay vacias
             if(noExiste){
@@ -190,21 +194,21 @@ function agregarTema(){
 
 
 // Crea las preguntas y las agrega a una lista.
-// Se accede utilizando liTemas.showPreguntas()
-function crearPregunta(a,b,c,d,e){
-        let nuevaPregunta = new Preguntas(a, b, c, d, e);
-        liTemas.addPreguntas(nuevaPregunta);
+// Se accede utilizando sistema.showPreguntas()
+function crearPregunta(texto,rCorrecta,rIncorrectas,level,tema){
+        let nuevaPregunta = new Preguntas(texto,rCorrecta,rIncorrectas,level,tema);
+        sistema.addPreguntas(nuevaPregunta);
 }
 
 
 // Lista las preguntas en la tabla.
 function listarPreguntas(){
-    ordenarPreguntas(liTemas.showPreguntas())
+    ordenarPreguntas(sistema.showPreguntas())
     tabla = document.getElementById("tablaPreguntas");
     tabla.innerHTML=""
 
 // Inserta las preguntas en la tabla
-    for (i of liTemas.showPreguntas()){
+    for (let i of sistema.showPreguntas()){
         let pregunta = tabla.insertRow();
 
         let celdaTema = pregunta.insertCell(0);
@@ -218,16 +222,16 @@ function listarPreguntas(){
         celdaTexto.textContent = i.texto;
         celdaCorrecta.textContent = i.respuestaCorrecta;
         celdaIncorecta.textContent = i.respuestasIncorrectas;
-        colorTemas2(i.tema.nombre, pregunta)
+        colorTemas(i.tema.nombre, pregunta)
     }
 // Muestra total de las preguntas
-    document.getElementById("cantidadPreguntas").innerHTML= liTemas.showPreguntas().length
+    document.getElementById("cantidadPreguntas").innerHTML= sistema.showPreguntas().length
 }
 
+// Colorea los temas segun el index que estos tienen en la lista, va del marron al amarillo.
+function colorTemas(tema, cellData){
 
-function colorTemas2(tema, cellData){
-
-    indexTema = liTemas.showLista().findIndex(item=> item.nombre == tema)
+    indexTema = sistema.showLista().findIndex(item=> item.nombre == tema)
 
     switch(indexTema){
         case 0:
@@ -281,57 +285,6 @@ function colorTemas2(tema, cellData){
 }
 
 
-
-// Cambia el color de cada fila de la tabla segun el tema y genera uno nuevo para proximos temas.
-function colorTemas(rowData, cellData){
-    switch(rowData){
-        case "Geografía":
-        cellData.style = "background-color: #F4D03F;"
-        break;
-        case "Matemáticas":
-        cellData.style = "background-color: #FAD7A0;"
-        break;
-        case "Historia":
-        cellData.style = "background-color: #E59866;"
-        break;
-        case "Deporte":
-        cellData.style = "background-color: #D4AC0D;"
-        break;
-        case "Lenguaje":
-        cellData.style = "background-color: #935116;"
-        break;       
-        case "Arte":
-        cellData.style = "background-color: #873600;"
-        break; 
-        case "Ciencia":
-        cellData.style = "background-color: #7D6608;"
-        break;
-        default:
-        let colorHex = stringToHexColor(rowData)
-        cellData.style.backgroundColor = colorHex
-        break;
-    }
-}
-
-// Como los colores de los temas genericos deben ser entre amarillo y marron y los demas ser aleatorios utilizamos esta funcion
-// VER SI HAY FORMA MAS FACIL
-function stringToHexColor(str) {
-    // Use a hash function to convert the string to a numeric value
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    
-    // Convert the numeric value to a hexadecimal color code
-    let color = "#";
-    for (let i = 0; i < 3; i++) {
-        let value = (hash >> (i * 8)) & 0xFF;
-        color += ("00" + value.toString(16)).substr(-2);
-    }
-    return color;
-}
-
-
 // Agrega pregunta
 function agregarPregunta(){
     let textoPregunta   = document.getElementById("textoPregunta").value;
@@ -352,8 +305,8 @@ function agregarPregunta(){
 // Verifica que la respuesta no este en las opciones incorrectas
         if (incorrectasPregunta.indexOf(respuestaPregunta)==-1){
 
-            nombre=liTemas.showLista().filter(tema =>  tema.nombre== temaSeleccionado)[0]['nombre']
-            descripcion=liTemas.showLista().filter(tema =>  tema.nombre== temaSeleccionado)[0]['descripcion']
+            nombre=sistema.showLista().filter(tema =>  tema.nombre== temaSeleccionado)[0]['nombre']
+            descripcion=sistema.showLista().filter(tema =>  tema.nombre== temaSeleccionado)[0]['descripcion']
             temaSeleccionado={nombre,descripcion}
 
             crearPregunta(textoPregunta, respuestaPregunta, incorrectasPregunta, nivelPregunta, temaSeleccionado)
@@ -376,7 +329,7 @@ function agregarPregunta(){
 }
 }
 
-/// VER ESTO NO ESTA BIEN
+/// Funciona, ver de uruguayizarlo
 function ordenarPreguntas(listaDePreguntas){
     let creciente = document.getElementById("opcion1");
     if(creciente.checked){
@@ -409,7 +362,7 @@ function ordenarPreguntas(listaDePreguntas){
 
 // Valida que la pregunta no exista para el mismo tema.
 function validarPregunta (tema, enunciado) {
-let temasFiltrados = liTemas.showPreguntas().filter(pregunta => pregunta.tema.nombre === tema);
+let temasFiltrados = sistema.showPreguntas().filter(pregunta => pregunta.tema.nombre === tema);
 let mismaPregunta = temasFiltrados.find(pregunta => pregunta.texto === enunciado);
 if(mismaPregunta){
     return true
@@ -426,7 +379,7 @@ if(mismaPregunta){
 
 // Filtra preguntas por tema y luego por nivel y las ordena al azar
 function filtrado(tema,nivel){
-    let temasFiltrados = liTemas.showPreguntas().filter(pregunta => pregunta.tema.nombre === tema);
+    let temasFiltrados = sistema.showPreguntas().filter(pregunta => pregunta.tema.nombre === tema);
     let nivelFiltrado = temasFiltrados.filter(pregunta => pregunta.lvl === nivel);
     let preguntasMezcladas = shuffleArray(nivelFiltrado);
     return preguntasMezcladas
@@ -456,7 +409,7 @@ function shuffleArray(array) {
 function mostrarPregunta(pregunta){
 
     document.getElementById("mostrarPregunta").innerHTML=pregunta.texto;
-    colorTemas2(pregunta.tema.nombre, document.getElementById("cajaPregunta"))
+    colorTemas(pregunta.tema.nombre, document.getElementById("cajaPregunta"))
 
     let botones = document.getElementById("respuestas");
     let respuestas = opciones(pregunta);
@@ -468,7 +421,7 @@ function mostrarPregunta(pregunta){
         nodo.appendChild(nodoTexto);
         botones.appendChild(nodo);
 
-        colorTemas2(pregunta.tema.nombre, nodo)
+        colorTemas(pregunta.tema.nombre, nodo)
         
         if(pregunta.respuestaCorrecta == i){
             nodo.onclick = function (){correcta(nodo)}
@@ -602,13 +555,15 @@ function reiniciarJuego(){
 
 
 // Finaliza el juego
-function terminarJuego(){
+function terminarJuego(valor){
  
     if(puntajeTotal > puntajeMaximo) {
         document.getElementById("maximoPuntaje").innerHTML=puntajeTotal;
     } 
 
+    // Si se clickea otra seccion, guarda el puntaje, reinicia el juego pero no da la alerta.
+    if(valor){
     alert("Juego terminado, puntaje obtejido: "+ puntajeTotal+"!! Felicitaciones")
+    }
     reiniciarJuego()
-
 }

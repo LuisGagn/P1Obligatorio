@@ -1,3 +1,9 @@
+// OBLIGATORIO PROGRAMACION 1 
+// REALIZADO POR:
+// EMILIANO MEDERO N° 310016
+// LUIS GAGÑEVIN N°338643
+
+
 class Temas {
     constructor(nombre, descripcion) {
         this.nombre = nombre;
@@ -31,10 +37,11 @@ class Sistema {
     addLista(valor){
         let temaExistente = this.listaTemas.find(tema => tema.nombre === valor.nombre);
         if (!temaExistente) {
+            // Si no existe el tema, lo crea y lo agrega.
             if(!inicializado){valor.cantidadPreguntas = 1}
             this.listaTemas.push(valor);
         } else {
-
+            // Si existe y no esta inicializado, suma 1 a el contador de preguntas.
             if(inicializado){
                 alert("El tema : " + valor.nombre + " Ya fue creado")
             } else {
@@ -59,7 +66,6 @@ class Sistema {
     // Preguntas
 
     addPreguntas(valor){
-        creandoTema= false;
         this.listaPreguntas.push(valor);
 
         if (inicializado){
