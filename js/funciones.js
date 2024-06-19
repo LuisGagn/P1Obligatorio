@@ -563,7 +563,7 @@ function terminarJuego(valor){
 
     // Si se clickea otra seccion, guarda el puntaje, reinicia el juego pero no da la alerta.
     if(valor){
-    alert("Juego terminado, puntaje obtejido: "+ puntajeTotal+"!! Felicitaciones")
+    alert("Juego terminado, puntaje obtenido: "+ puntajeTotal+"!! Felicitaciones")
     }
     reiniciarJuego()
 }
